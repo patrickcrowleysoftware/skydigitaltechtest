@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"       
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">       
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">       
+<head>       
+<meta http-equiv="content-type" content="text/html; charset=utf-8" charset="ISO-8859-1" />
+<title>Sky Product Selection</title>
+<script type="text/javascript">       
+
+var empty = "(Empty)";
+
+function resetSelections()      
+{      
+    var elLength = document.skytv.elements.length;
+    
+    for (i=0; i<elLength; i++)
+    {
+        var type = skytv.elements[i].type;
+        if (type=="checkbox" && skytv.elements[i].checked){
+        	skytv.elements[i].checked = false;
+        }
+        else if (type=="checkbox") {
+			// Option not checked
+        }
+
+        updateChoices(empty); 
+    }
+}
+
+function checkSelections()      
+{      
+	var choices = "";
+    updateChoices(empty); 
+
+    var elLength = document.skytv.elements.length;
+    var selection=false;
+    
+    for (i=0; i<elLength; i++)
+    {
+        var type = skytv.elements[i].type;
+        if (type=="checkbox" && skytv.elements[i].checked){
+        	choices = ""+choices + skytv.elements[i].name+"<br />";
+        	selection=true;
+        }
+        else if (type=="checkbox") {
+			// Option not checked
+        }
+    }
+	
+    if (selection) {
+        updateChoices(choices); 
+    	
+    } else {
+        updateChoices(empty); 
+    	
+    }
+}
+
+function updateChoices(s) {
+	document.getElementById("skychoices").innerHTML = ""+s;	  
+}
+
+</script>
+
+</head>
+
+<body>
+	<h1 align="center"><font color="darkblue"><b>Sky Product Selection</b></font></h1>
+	
+	<div align="center">
+		<form name="skytv" action="SkyTechServlet" method="post" >
+	
+		<table border="3">
+
+			<!-- Page Header -->
+			<tr>
+				<td colspan="3">
+				<div>
+					<h2><font color="blue">Please Choose your channel selection(s):</font></h2>
+				</div>
+				</td>
+			</tr>
+			
+			<!-- Main Section -->
+			<tr>
+				<!-- Column 1 -->
+				<td valign="top">
+					<h2><b>Sports</b></h2>
+					<b />
+					<input type="checkbox" onclick="checkSelections()" name="Arsenal TV" />Arsenal TV<br />
+					<input type="checkbox" onclick="checkSelections()" name="Chelsea TV" />Chelsea TV<br />
+					<input type="checkbox" onclick="checkSelections()" name="Liverpool TV" />Liverpool TV<br />
+ 				</td>
+				<!-- Column 2 -->
+				<td valign="top">
+					<h2><b>News</b></h2>
+					<b />
+					<input type="checkbox" onclick="checkSelections()" name="Sky News" />Sky News<br />
+					<input type="checkbox" onclick="checkSelections()" name="Sky Sports News" />Sky Sports News<br />
+				</td>
+				<!-- Column 3 -->
+				<td valign="top">
+					<h2><b>Basket</b></h2>
+					<b />
+					<p id="skychoices">(Empty)</p>
+	
+					<!-- Hidden field simulating the customer ID from a customer Cookie-->
+					<input type="hidden" name="custID" value="1100002">
+					
+					<div align="center">
+						<input type="submit" value="Checkout">
+					</div>
+					<b />
+				</td>
+			</tr>
+			
+			<!-- Uncheck All -->
+			<tr>
+				<td colspan="3">
+				<div>
+					<input type="button" onclick="resetSelections()" name="clearselections" value="Clear Selections"/><br />
+				</div>
+				</td>
+			</tr>
+
+			<!-- Page Footer -->
+			<tr>
+				<td colspan="3">
+				<div>
+					<b />
+					<h2></h2>
+					<h2><font color="blue">Click on "Checkout" button when finished selection(s).</font></h2>
+					<b />
+				</div>
+				</td>
+			</tr>
+			
+			</form>
+		</table>	
+		
+ 	
+	</div>
+	
+</body>
+</html>
